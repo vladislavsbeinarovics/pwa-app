@@ -8,5 +8,5 @@ if ('serviceWorker' in navigator)
 			console.log('SW registration failed: ', registrationError);
 		});
 
-	navigator.serviceWorker.register('/service-worker.js').catch(e => console.log('Full error:', e))
+	navigator.serviceWorker.register('./service-worker.js').catch(e => console.log('Full error:', e))
 }
