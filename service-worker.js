@@ -1,13 +1,22 @@
+const CACHE_NAME = 'my-pwa-cache-v1';
+const urlsToCache = [
+	'./',
+	'./index.html',
+	'./manifest.json',
+	'./app.js',
+	'./js/index.js',
+	'./js/db.js',
+	'./favicon.ico',
+	'./icon-192.png',
+	'./icon-512.png'
+];
+
 self.addEventListener('install', (e) => {
 	console.log('[ServiceWorker] Installed');
 
 	e.waitUntil(
 		caches.open('my-cache').then((cache) => {
-			return cache.addAll([
-				'./',
-				'./index.html',
-				'./app.js',
-			]);
+			return cache.addAll(urlsToCache);
 		})
 	);
 });
@@ -17,15 +26,5 @@ self.addEventListener('fetch', (e) => {
 		caches.match(e.request).then((response) => {
 			return response || fetch(e.request);
 		})
-	);
+	);	
 });
-
-// console.log('Service Worker loaded');
-
-// self.addEventListener('install', (e) => {
-//     console.log('SW: Install event');
-// });
-
-// self.addEventListener('fetch', (e) => {
-//     console.log('SW: Fetch event');
-// });
